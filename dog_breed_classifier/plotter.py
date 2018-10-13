@@ -1,31 +1,42 @@
-import matplotlib.pyplot as plt
-from sklearn.metrics import classification_report, confusion_matrix
-import numpy as np
 import json
+import matplotlib.pyplot as plt
+import numpy as np
+from sklearn.metrics import classification_report, confusion_matrix
 import util
+
 
 def plot_accuracy(history):
     plt.plot(history.history['acc'])
-    plt.plot(history.history['val_acc'])
     plt.title('Model accuracy')
     plt.ylabel('Accuracy')
     plt.xlabel('Epoch')
-    plt.legend(['Train', 'Validation'], loc='upper left')
+
+    if 'val_acc' in history.history.keys():
+        plt.plot(history.history['val_acc'])
+        plt.legend(['Train', 'Validation'], loc='upper left')
+    else:
+        plt.legend(['Train'], loc='upper left')
+
     plt.savefig('model_accuracy.pdf')
     plt.close()
 
 
 def plot_loss(history):
     plt.plot(history.history['loss'])
-    plt.plot(history.history['val_loss'])
     plt.title('Model loss')
     plt.ylabel('Loss')
     plt.xlabel('Epoch')
-    plt.legend(['Train', 'Validation'], loc='upper left')
+
+    if 'val_loss' in history.history.keys():
+        plt.plot(history.history['val_loss'])
+        plt.legend(['Train', 'Validation'], loc='upper left')
+    else:
+        plt.legend(['Train'], loc='upper left')
+
     plt.savefig('model_loss.pdf')
 
 
-def clf_statistics(nn, x_test, y_test):
+def get_statistics(nn, x_test, y_test):
     # Compute probabilities and assign most probable label
     y_pred = np.argmax(nn.predict(x_test), axis=1)
 
