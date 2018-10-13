@@ -33,13 +33,16 @@ class Dogs:
                 (num_samples, self.image_width, self.image_height, 3)
         y_train: numpy array of training one hot encodings of dog breed of corresponding x_train images
         """
-        x_train = []
-        y_train = []
+        train_samples = []
 
         for i, breed in enumerate(self.train_annotations.keys()):
             for j, annotation in enumerate(self.train_annotations[breed]):
-                x_train.append(util.get_resized_image_data(annotation, self.image_width, self.image_height))
-                y_train.append(self.one_hot_encodings[breed])
+                sample_x = util.get_resized_image_data(annotation, self.image_width, self.image_height)
+                sample_y = self.one_hot_encodings[breed]
+                train_samples.append((sample_x, sample_y))
+
+        np.random.shuffle(train_samples)
+        x_train, y_train = map(list, zip(*train_samples))
 
         return np.array(x_train), np.array(y_train)
 
