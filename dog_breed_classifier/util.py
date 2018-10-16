@@ -6,8 +6,8 @@ import xml.etree.ElementTree as ET
 from PIL import Image
 
 
-ANNOTATION_PATH = 'C:/Users/JC/Documents/studia/erasmus/dl/stanford_dogs/annotation/Annotation/'
-IMAGE_PATH = 'C:/Users/JC/Documents/studia/erasmus/dl/stanford_dogs/images/Images/'
+ANNOTATION_PATH = 'C:/Users/JC/Documents/studia/erasmus/dl/lab_1/autonomous/stanford_dogs/annotation/Annotation/'
+IMAGE_PATH = 'C:/Users/JC/Documents/studia/erasmus/dl/lab_1/autonomous/stanford_dogs/images/Images/'
 BOX_FOLDER = 'boxes_'
 
 
@@ -389,7 +389,6 @@ def one_hot_encoding_to_class(one_hot_encodings):
 
 def main():
     generate_training_test_lists()
-    # pass
 
 
 if __name__ == "__main__":

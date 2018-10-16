@@ -1,6 +1,6 @@
 from dogs import Dogs
 from keras.models import Sequential
-from keras.layers import Dense
+from keras.layers import Dense, Dropout
 import plotter as plt
 
 # Load the Stanford dogs dataset
@@ -12,7 +12,7 @@ test_set_len = x_test.shape[0]
 input_len = x_train.shape[1] * x_train.shape[2] * x_train.shape[3]
 nb_breeds = y_train.shape[1]
 batch_size = 128
-nb_epochs = 10
+nb_epochs = 50
 
 # Reshape the data to make it suitable for a flattened input layer
 x_train = x_train.reshape(train_set_len, input_len)
@@ -20,14 +20,18 @@ x_test = x_test.reshape(test_set_len, input_len)
 
 # Define the NN architecture
 nn = Sequential()
-nn.add(Dense(256, activation='relu', input_dim=input_len))
-# nn.add(Dense(256, activation='relu'))
-# nn.add(Dense(64, activation='relu'))
+nn.add(Dense(1024, activation='relu', input_dim=input_len))
+nn.add(Dropout(0.2))
+nn.add(Dense(512, activation='relu'))
+nn.add(Dropout(0.2))
+nn.add(Dense(256, activation='relu'))
+nn.add(Dropout(0.2))
+nn.add(Dense(256, activation='relu'))
+nn.add(Dropout(0.2))
 nn.add(Dense(nb_breeds, activation='softmax'))
 
 # Compile the NN
 nn.compile(optimizer='sgd', loss='categorical_crossentropy', metrics=['accuracy'])
-
 # Train the NN
 history = nn.fit(x_train, y_train, batch_size=batch_size, epochs=nb_epochs, validation_split=0.2)
 
