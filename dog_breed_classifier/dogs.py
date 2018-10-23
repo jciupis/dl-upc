@@ -8,7 +8,8 @@ class Dogs:
     """
     def __init__(self, image_width=64, image_height=64):
         """
-        The constructor loads the one hot encodings and image annotations..
+        The constructor loads the one hot encodings and image annotations.
+
         :param image_width:
         :param image_height:
         """
@@ -67,7 +68,8 @@ class Dogs:
 
     def load_data(self):
         """
-        This function loads the dataset into RAM
+        This function loads the dataset into RAM.
+
         :return:
         x_train: float16 numpy array of training RGB image data with shape
                 (num_samples, self.image_width, self.image_height, 3)
