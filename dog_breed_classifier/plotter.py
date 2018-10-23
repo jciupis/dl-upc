@@ -6,6 +6,11 @@ import util
 
 
 def plot_accuracy(history):
+    """
+    Plot accuracy of training and, if available, validation data.
+
+    :param history: Keras History object.
+    """
     plt.plot(history.history['acc'])
     plt.title('Model accuracy')
     plt.ylabel('Accuracy')
@@ -22,6 +27,11 @@ def plot_accuracy(history):
 
 
 def plot_loss(history):
+    """
+        Plot loss of training and, if available, validation data.
+
+        :param history: Keras History object.
+        """
     plt.plot(history.history['loss'])
     plt.title('Model loss')
     plt.ylabel('Loss')
@@ -37,6 +47,14 @@ def plot_loss(history):
 
 
 def get_statistics(nn, x_test, y_test):
+    """
+    Save confusion matrix and classification report to .txt files.
+
+    :param nn: Keras neural network model.
+    :param x_test: Test data.
+    :param y_test: Test labels.
+    :return:
+    """
     # Compute probabilities and assign most probable label
     y_pred = np.argmax(nn.predict(x_test), axis=1)
 
