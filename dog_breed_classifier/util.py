@@ -388,7 +388,7 @@ def one_hot_encoding_to_class(one_hot_encodings):
 
 
 def main():
-    generate_all_resized_images()
+    generate_all_resized_images(64, 64)
     generate_training_test_lists()
 
 
