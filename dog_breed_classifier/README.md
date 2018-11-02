@@ -1,8 +1,3 @@
-# Dog breed classification using neural networks
-
-This is an academic project using various kinds of neural networks to classify dog breeds based on images from the
-[Stanford Dogs](http://vision.stanford.edu/aditya86/ImageNetDogs/) dataset.
-
 ## Getting started
 To run the code, first download the [Stanford Dogs](http://vision.stanford.edu/aditya86/ImageNetDogs/) dataset. The code
 has been written for Python 3 using Keras, matplotlib and PIL libraries, so make sure to download the necessary dependencies.
