@@ -1,5 +1,6 @@
 import numpy as np
 import os
+from shutil import copy, rmtree
 from sklearn.cluster import KMeans
 from sklearn.decomposition import PCA
 from sklearn.manifold import TSNE
@@ -8,7 +9,7 @@ from matplotlib import pyplot as plt
 from matplotlib import image
 
 
-def cluster(embeddings, nb_clusters):
+def cluster(embeddings, labels, nb_clusters):
     """
     Perform a K-means clustering and plot the results.
 
@@ -17,6 +18,17 @@ def cluster(embeddings, nb_clusters):
     """
     # Perform K-means clustering
     pred_labels = KMeans(n_clusters=nb_clusters, random_state=0).fit_predict(embeddings)
+
+    folder_names = []
+    for label in np.unique(pred_labels):
+        folder_name = os.path.join(os.path.dirname(os.path.abspath(labels[0])), "label_" + str(label))
+        folder_names.append(folder_name)
+        if os.path.exists(folder_name):
+            rmtree(folder_name)
+        os.makedirs(folder_name)
+
+    for idx, filename in enumerate(labels):
+        copy(filename, folder_names[pred_labels[idx]])
 
     # Apply a dimensionality reduction technique to visualize 2 dimensions.
     vis_matrix = TSNE(n_components=2).fit_transform(embeddings)
@@ -123,7 +135,7 @@ def main():
     if choice == 0:
         nearest_neighbor(reduced_mbed, labels)
     elif choice == 1:
-        cluster(reduced_mbed, 5)
+        cluster(reduced_mbed, labels, 3)
     elif choice == 2:
         check_equation(embeddings, labels)
 
