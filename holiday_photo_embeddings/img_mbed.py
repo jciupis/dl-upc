@@ -1,4 +1,3 @@
-import sys, time
 import numpy as np
 from keras.applications.vgg16 import VGG16
 from keras.preprocessing import image

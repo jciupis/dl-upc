@@ -66,6 +66,7 @@ def generate_resized_images(img_path, dst_path, new_width, new_height):
             preprocess_image(f, dst_path, new_width, new_height)
             print('Processing image {step}/{total}'.format(step=i, total=len(file_list)))
 
+
 def main():
     img_path = 'E:/slovenia'
     dst_path = 'E:/slovenia/all_days_resized'

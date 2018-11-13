@@ -14,6 +14,7 @@ def cluster(embeddings, labels, nb_clusters):
     Perform a K-means clustering and plot the results.
 
     :param embeddings: numpy array, image embeddings
+    :param labels: numpy array, image labels
     :param nb_clusters: int, number of clusters
     """
     # Perform K-means clustering
@@ -80,7 +81,13 @@ def nearest_neighbor(embeddings, labels):
     plt.show()
 
 
-def check_equation(embeddings, labels):
+def diff_find(embeddings, labels):
+    """
+    Find the nearest neighbor of difference of two images and display them side by side.
+
+    :param embeddings: numpy array, image embeddings
+    :param labels: numpy_array, image labels
+    """
     img_path_1 = 'IMG_5954_224_224.jpg'
     img_path_2 = 'IMG_5953_224_224.jpg'
 
@@ -137,7 +144,7 @@ def main():
     elif choice == 1:
         cluster(reduced_mbed, labels, 3)
     elif choice == 2:
-        check_equation(embeddings, labels)
+        diff_find(embeddings, labels)
 
 
 if __name__ == '__main__':
