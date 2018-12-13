@@ -8,3 +8,6 @@ This is an academic project using various kinds of neural networks to classify d
 ## Holiday photographs clustering using image embeddings
 This is an academic project using pre-trained deep neural networks to generate image embeddings and perform clustering
 of personal collection of photographs.
+
+## Beer review generation
+This is an acamedic project using recurrent neural networks to generate style-specific beer reviews.
