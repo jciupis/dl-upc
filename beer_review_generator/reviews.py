@@ -4,6 +4,7 @@ import sys
 # 'Stouts and porters': 68, 'India Pale Ale (IPA)': 17
 IPA_ID = 17
 STOUTS_ID = 68
+MAX_REVIEWS_PER_BEER = 150
 
 
 def cleaned_up(review):
@@ -44,13 +45,22 @@ def save_reviews(rb, style_id):
             sys.stdout.write('\rSaving reviews of beer number {0}.'.format(i))
             sys.stdout.flush()
 
+            review_cnt = 0
             reviews = beer.get_review_comments()
+
             for r in reviews:
+                # Do not save more than 150 reviews of a given beer to keep the corpus short.
+                if review_cnt >= MAX_REVIEWS_PER_BEER:
+                    break
+
+                # Do not save reviews containing non-ASCII characters.
                 try:
                     r.encode('ascii')
                 except UnicodeEncodeError:
                     continue
 
+                # Clean up the review and save it.
+                review_cnt = review_cnt + 1
                 f.write(cleaned_up(r))
 
     print('\nBeer reviews saved in ' + filename)
